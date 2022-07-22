@@ -297,7 +297,7 @@ paket-files/
 *.sln.iml
 
 # vscode
-.vscode/*
+*/.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -347,3 +347,5 @@ ASALocalRun/
 
 **/.DS_Store
 /**/.idea
+
+appsettings.json
