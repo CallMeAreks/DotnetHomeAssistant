@@ -5,13 +5,13 @@ namespace DotnetHomeAssistant.Apps.Extensions;
 
 public static class StateObservableExtensions
 {
-    public static IObservable<StateChange> WhenTriggerIsOffFor(this IObservable<StateChange> stateChange, AutomaticLights automaticLights)
+    public static IObservable<StateChange> WhenTriggerIsOffFor(this IObservable<StateChange> stateChange, AutomaticLightsParameters parameters)
     {
-        if (automaticLights.LightBehavior == AutomaticLightBehavior.WhileTriggerIsOn)
+        if (parameters.LightBehavior == AutomaticLightBehavior.WhileTriggerIsOn)
         {
             return stateChange.Where(e => e.New.IsOff());
         }
 
-        return stateChange.WhenStateIsFor(e => e.IsOff(), TimeSpan.FromMinutes(automaticLights.DurationInMinutes));
+        return stateChange.WhenStateIsFor(e => e.IsOff(), TimeSpan.FromMinutes(parameters.DurationInMinutes));
     }
 }

@@ -6,13 +6,13 @@ namespace DotnetHomeAssistant.Apps.LightOnMovement;
 [NetDaemonApp]
 public class OfficeMotionActivatedLightsApp : MotionActivatedLightsApp
 {
-    public OfficeMotionActivatedLightsApp(IHaContext ha) : base(ha, AutomaticLightsFactory())
+    public OfficeMotionActivatedLightsApp(IHaContext ha) : base(ha, AutomaticLightsParametersFactory())
     {
     }
 
-    private static Func<Entities,AutomaticLights> AutomaticLightsFactory()
+    private static Func<Entities,AutomaticLightsParameters> AutomaticLightsParametersFactory()
     {
-        return entities => new AutomaticLights(
+        return entities => new AutomaticLightsParameters(
             entities.BinarySensor.OfficeMotion,
             new[] { entities.Light.UpstairsRoomLights },
             AutomaticLightBehavior.FixedDuration);
