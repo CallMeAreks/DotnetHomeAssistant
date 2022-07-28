@@ -1,11 +1,19 @@
-﻿namespace DotnetHomeAssistant.Apps.LightOnMovement;
+﻿using DotnetHomeAssistant.Apps.LightOnMovement.Models;
+using HomeAssistantGenerated;
+
+namespace DotnetHomeAssistant.Apps.LightOnMovement;
 
 [NetDaemonApp]
 public class KitchenMotionActivatedLightsApp : MotionActivatedLightsApp
 {
-    public KitchenMotionActivatedLightsApp(IHaContext ha)
-        : base(ha, "binary_sensor.lumi_lumi_sensor_motion_aq2_ias_zone")
+    public KitchenMotionActivatedLightsApp(IHaContext ha) : base(ha, AutomaticLightsFactory())
     {
-        SetEveningLights("light.kitchen_lights_1", "light.kitchen_lights_2");
+    }
+
+    private static Func<Entities,AutomaticLights> AutomaticLightsFactory()
+    {
+        return entities => new AutomaticLights(
+            entities.BinarySensor.KitchenPresenceSensor,
+            new [] { entities.Light.KitchenLights1, entities.Light.KitchenLights2 });
     }
 }

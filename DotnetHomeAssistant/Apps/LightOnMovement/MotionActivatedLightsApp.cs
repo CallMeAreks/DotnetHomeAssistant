@@ -1,50 +1,42 @@
-using System.Collections.Generic;
-using System.Linq;
+using DotnetHomeAssistant.Apps.Extensions;
+using DotnetHomeAssistant.Apps.LightOnMovement.Models;
 using HomeAssistantGenerated;
 using NetDaemon.HassModel.Entities;
+using static DotnetHomeAssistant.Apps.Constants;
 
 namespace DotnetHomeAssistant.Apps.LightOnMovement;
 
 public abstract class MotionActivatedLightsApp
 {
+    private readonly AutomaticLights _automaticLights;
     private readonly Entities _entities;
-    private readonly Services _services;
 
-    private readonly List<string> _eveningLights = new();
-    private readonly List<string> _nightLights = new();
-
-    protected MotionActivatedLightsApp(IHaContext ha, string motionSensorId, bool turnOffAutomatically = true)
+    protected MotionActivatedLightsApp(IHaContext ha, Func<Entities,AutomaticLights> automaticLightsFactory)
     {
         _entities = new Entities(ha);
-        _services = new Services(ha);
+        _automaticLights = automaticLightsFactory(_entities);
 
-        ha.Entity(motionSensorId)
+        _automaticLights.TriggerEntity
             .StateChanges()
             .Where(e => e.New.IsOn())
             .Subscribe(TurnOnLights);
 
-        if (turnOffAutomatically)
-        {
-            ha.Entity(motionSensorId)
-                .StateChanges()
-                .WhenStateIsFor(e => e.IsOff(), TimeSpan.FromMinutes(5))
-                .Subscribe(TurnOffLights);
-        }
+        _automaticLights.TriggerEntity
+            .StateChanges()
+            .WhenTriggerIsOffFor(_automaticLights)
+            .Subscribe(TurnOffLights);
     }
-
-    protected void SetEveningLights(params string[] entityIds) => _eveningLights.AddRange(entityIds);
-    protected void SetNightLights(params string[] entityIds) => _nightLights.AddRange(entityIds);
 
     protected virtual void TurnOnLights(StateChange stateChange)
     {
-        if (_eveningLights.Any() && _entities.Sun.Sun.State == "below_horizon")
+        if (_entities.Sun.Sun.Attributes!.Elevation < SunElevationThresholdAtNight)
         {
-            _services.Light.TurnOn(ServiceTarget.FromEntities(_eveningLights));
+            _automaticLights.Lights.TurnOn();
         }
     }
 
     protected virtual void TurnOffLights(StateChange stateChange)
     {
-        _services.Light.TurnOff(ServiceTarget.FromEntities(_eveningLights.Concat(_nightLights)));
+        _automaticLights.Lights.TurnOff();
     }
 }
