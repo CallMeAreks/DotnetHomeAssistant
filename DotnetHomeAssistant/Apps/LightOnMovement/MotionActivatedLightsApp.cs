@@ -11,10 +11,10 @@ public abstract class MotionActivatedLightsApp
     private readonly AutomaticLightsParameters _parameters;
     private readonly Entities _entities;
 
-    protected MotionActivatedLightsApp(IHaContext ha, Func<Entities,AutomaticLightsParameters> automaticLightsFactory)
+    protected MotionActivatedLightsApp(IHaContext ha, Func<Entities,AutomaticLightsParameters> parametersFactory)
     {
         _entities = new Entities(ha);
-        _parameters = automaticLightsFactory(_entities);
+        _parameters = parametersFactory(_entities);
 
         _parameters.TriggerEntity
             .StateChanges()
