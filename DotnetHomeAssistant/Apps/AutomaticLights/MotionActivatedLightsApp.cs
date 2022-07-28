@@ -1,10 +1,9 @@
+using DotnetHomeAssistant.Apps.AutomaticLights.Models;
 using DotnetHomeAssistant.Apps.Extensions;
-using DotnetHomeAssistant.Apps.LightOnMovement.Models;
 using HomeAssistantGenerated;
 using NetDaemon.HassModel.Entities;
-using static DotnetHomeAssistant.Apps.Constants;
 
-namespace DotnetHomeAssistant.Apps.LightOnMovement;
+namespace DotnetHomeAssistant.Apps.AutomaticLights;
 
 public abstract class MotionActivatedLightsApp
 {
@@ -16,26 +15,26 @@ public abstract class MotionActivatedLightsApp
         _entities = new Entities(ha);
         _parameters = parametersFactory(_entities);
 
-        _parameters.TriggerEntity
+        _parameters.Trigger
             .StateChanges()
             .Where(e => e.New.IsOn())
             .Subscribe(TurnOnLights);
 
-        _parameters.TriggerEntity
+        _parameters.Trigger
             .StateChanges()
             .WhenTriggerIsOffFor(_parameters)
             .Subscribe(TurnOffLights);
     }
 
-    protected virtual void TurnOnLights(StateChange stateChange)
+    protected virtual void TurnOnLights(StateChange _)
     {
-        if (_entities.Sun.Sun.Attributes!.Elevation < SunElevationThresholdAtNight)
+        if (_entities.Sun.Sun.Attributes!.Elevation < Sun.ElevationThresholdAtNight)
         {
             _parameters.Lights.TurnOn();
         }
     }
 
-    protected virtual void TurnOffLights(StateChange stateChange)
+    protected virtual void TurnOffLights(StateChange _)
     {
         _parameters.Lights.TurnOff();
     }

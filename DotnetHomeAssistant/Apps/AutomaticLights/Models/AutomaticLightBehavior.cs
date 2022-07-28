@@ -1,4 +1,4 @@
-﻿namespace DotnetHomeAssistant.Apps.LightOnMovement.Models;
+﻿namespace DotnetHomeAssistant.Apps.AutomaticLights.Models;
 
 public enum AutomaticLightBehavior
 {

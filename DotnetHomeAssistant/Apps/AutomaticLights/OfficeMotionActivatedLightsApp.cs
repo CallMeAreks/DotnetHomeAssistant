@@ -1,7 +1,7 @@
-﻿using DotnetHomeAssistant.Apps.LightOnMovement.Models;
+﻿using DotnetHomeAssistant.Apps.AutomaticLights.Models;
 using HomeAssistantGenerated;
 
-namespace DotnetHomeAssistant.Apps.LightOnMovement;
+namespace DotnetHomeAssistant.Apps.AutomaticLights;
 
 [NetDaemonApp]
 public class OfficeMotionActivatedLightsApp : MotionActivatedLightsApp
@@ -13,8 +13,8 @@ public class OfficeMotionActivatedLightsApp : MotionActivatedLightsApp
     private static Func<Entities,AutomaticLightsParameters> AutomaticLightsParametersFactory()
     {
         return entities => new AutomaticLightsParameters(
-            entities.BinarySensor.OfficeMotion,
-            new[] { entities.Light.UpstairsRoomLights },
-            AutomaticLightBehavior.FixedDuration);
+            Trigger: entities.BinarySensor.OfficeMotion,
+            Behavior: AutomaticLightBehavior.FixedDuration,
+            Lights: new [] { entities.Light.UpstairsRoomLights } );
     }
 }
