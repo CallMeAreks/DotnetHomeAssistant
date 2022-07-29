@@ -1,28 +1,28 @@
-using DotnetHomeAssistant.Apps.AutomaticLights.Models;
 using DotnetHomeAssistant.Apps.Extensions;
+using DotnetHomeAssistant.Apps.Lights.Models;
 using HomeAssistantGenerated;
 using NetDaemon.HassModel.Entities;
 
-namespace DotnetHomeAssistant.Apps.AutomaticLights;
+namespace DotnetHomeAssistant.Apps.Lights;
 
 public abstract class MotionActivatedLightsApp
 {
-    protected readonly AutomaticLightsParameters Parameters;
-    protected readonly Entities Entities;
+    protected AutomaticLights AutomaticLights { get; }
+    protected Entities Entities { get; }
 
-    protected MotionActivatedLightsApp(IHaContext ha, Func<Entities,AutomaticLightsParameters> parametersFactory)
+    protected MotionActivatedLightsApp(IHaContext ha, Func<Entities, AutomaticLights> factory)
     {
         Entities = new Entities(ha);
-        Parameters = parametersFactory(Entities);
+        AutomaticLights = factory(Entities);
 
-        Parameters.Trigger
+        AutomaticLights.Trigger
             .StateChanges()
             .Where(e => e.New.IsOn())
             .Subscribe(TurnOnLights);
 
-        Parameters.Trigger
+        AutomaticLights.Trigger
             .StateChanges()
-            .WhenTriggerIsOffFor(Parameters)
+            .WhenTriggerIsOffFor(AutomaticLights)
             .Subscribe(TurnOffLights);
     }
 
@@ -30,12 +30,12 @@ public abstract class MotionActivatedLightsApp
     {
         if (Entities.Sun.BelowNightlyElevationThreshold())
         {
-            Parameters.Lights.TurnOn();
+            AutomaticLights.TurnOn();
         }
     }
 
     protected virtual void TurnOffLights(StateChange _)
     {
-        Parameters.Lights.TurnOff();
+        AutomaticLights.TurnOff();
     }
 }
