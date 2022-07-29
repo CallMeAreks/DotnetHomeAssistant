@@ -19,6 +19,6 @@ public class LivingRoomLightsApp
         entities.BinarySensor.LumiLumiSensorMagnetAq2OnOff
             .StateChanges()
             .Where(e => e.New.IsOn())
-            .Subscribe(automaticLights.TurnOn);
+            .Subscribe(_ => automaticLights.TurnOn());
     }
 }

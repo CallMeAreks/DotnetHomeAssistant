@@ -5,7 +5,7 @@ namespace DotnetHomeAssistant.Apps.Lights.Interfaces;
 
 public interface IDawnSelectionStage
 {
-    public ITriggerSelectionStage AndDawnLights(params LightEntity[] lightEntities);
+    public ITriggerSelectionStage AndDawnLights(LightEntity lightEntity, params LightEntity[] lightEntities);
     public IBehaviorSelectionStage TriggeredBy(Entity trigger);
 }
 

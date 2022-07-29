@@ -7,13 +7,13 @@ using NetDaemon.HassModel.Entities;
 
 namespace DotnetHomeAssistant.Apps.Lights.Models;
 
-public class AutomaticLights : ILightSelectionStage, IDawnSelectionStage, ITriggerSelectionStage, IBehaviorSelectionStage, IInitializeStage
+public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSelectionStage, ITriggerSelectionStage, IBehaviorSelectionStage, IInitializeStage
 {
     private static readonly TimeSpan DefaultDuration = TimeSpan.FromMinutes(5);
     private readonly Entities _entities;
 
-    private List<LightEntity> _lights = null!;
-    private List<LightEntity> _dawnLights = null!;
+    private readonly List<LightEntity> _lights = new();
+    private readonly List<LightEntity> _dawnLights = new();
 
     private Entity _trigger = null!;
     private AutomaticLightBehavior _behavior;
@@ -29,22 +29,22 @@ public class AutomaticLights : ILightSelectionStage, IDawnSelectionStage, ITrigg
         return new AutomaticLights(entities);
     }
 
-    public AutomaticLights Initialize()
+    public IAutomaticLights Initialize()
     {
         _trigger
             .StateChanges()
             .Where(e => e.New.IsOn())
-            .Subscribe(TurnOn);
+            .Subscribe(_ => TurnOn());
 
         _trigger
             .StateChanges()
             .WhenTriggerIsOffFor(_behavior, _duration)
-            .Subscribe(TurnOff);
+            .Subscribe(_ => TurnOff());
 
         return this;
     }
 
-    public void TurnOn(StateChange _)
+    public void TurnOn()
     {
         if (!_entities.Sun.BelowNightlyElevationThreshold())
         {
@@ -61,17 +61,19 @@ public class AutomaticLights : ILightSelectionStage, IDawnSelectionStage, ITrigg
         }
     }
 
-    public void TurnOff(StateChange _) => _lights.Concat(_dawnLights).TurnOff();
+    public void TurnOff() => _lights.Concat(_dawnLights).TurnOff();
 
-    public IDawnSelectionStage HandleLights(params LightEntity[] lightEntities)
+    public IDawnSelectionStage HandleLights(LightEntity lightEntity, params LightEntity[] lightEntities)
     {
-        _lights = lightEntities.ToList();
+        _lights.Add(lightEntity);
+        _lights.AddRange(lightEntities);
         return this;
     }
 
-    public ITriggerSelectionStage AndDawnLights(params LightEntity[] lightEntities)
+    public ITriggerSelectionStage AndDawnLights(LightEntity lightEntity, params LightEntity[] lightEntities)
     {
-        _dawnLights = lightEntities.ToList();
+        _dawnLights.Add(lightEntity);
+        _dawnLights.AddRange(lightEntities);
         return this;
     }
 

@@ -4,5 +4,5 @@ namespace DotnetHomeAssistant.Apps.Lights.Interfaces;
 
 public interface ILightSelectionStage
 {
-    public IDawnSelectionStage HandleLights(params LightEntity[] lightEntities);
+    public IDawnSelectionStage HandleLights(LightEntity lightEntity, params LightEntity[] lightEntities);
 }
