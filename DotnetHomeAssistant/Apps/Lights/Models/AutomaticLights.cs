@@ -7,7 +7,7 @@ using NetDaemon.HassModel.Entities;
 
 namespace DotnetHomeAssistant.Apps.Lights.Models;
 
-public class AutomaticLights : ILightSelectionStage, IDawnSelectionStage, IBehaviorSelectionStage, IInitializeStage
+public class AutomaticLights : ILightSelectionStage, IDawnSelectionStage, ITriggerSelectionStage, IBehaviorSelectionStage, IInitializeStage
 {
     private static readonly TimeSpan DefaultDuration = TimeSpan.FromMinutes(5);
     private readonly Entities _entities;
@@ -69,7 +69,7 @@ public class AutomaticLights : ILightSelectionStage, IDawnSelectionStage, IBehav
         return this;
     }
 
-    public IDawnSelectionStage AndDawnLights(params LightEntity[] lightEntities)
+    public ITriggerSelectionStage AndDawnLights(params LightEntity[] lightEntities)
     {
         _dawnLights = lightEntities.ToList();
         return this;
