@@ -7,35 +7,35 @@ namespace DotnetHomeAssistant.Apps.AutomaticLights;
 
 public abstract class MotionActivatedLightsApp
 {
-    private readonly AutomaticLightsParameters _parameters;
-    private readonly Entities _entities;
+    protected readonly AutomaticLightsParameters Parameters;
+    protected readonly Entities Entities;
 
     protected MotionActivatedLightsApp(IHaContext ha, Func<Entities,AutomaticLightsParameters> parametersFactory)
     {
-        _entities = new Entities(ha);
-        _parameters = parametersFactory(_entities);
+        Entities = new Entities(ha);
+        Parameters = parametersFactory(Entities);
 
-        _parameters.Trigger
+        Parameters.Trigger
             .StateChanges()
             .Where(e => e.New.IsOn())
             .Subscribe(TurnOnLights);
 
-        _parameters.Trigger
+        Parameters.Trigger
             .StateChanges()
-            .WhenTriggerIsOffFor(_parameters)
+            .WhenTriggerIsOffFor(Parameters)
             .Subscribe(TurnOffLights);
     }
 
     protected virtual void TurnOnLights(StateChange _)
     {
-        if (_entities.Sun.Sun.Attributes!.Elevation < Sun.ElevationThresholdAtNight)
+        if (Entities.Sun.BelowNightlyElevationThreshold())
         {
-            _parameters.Lights.TurnOn();
+            Parameters.Lights.TurnOn();
         }
     }
 
     protected virtual void TurnOffLights(StateChange _)
     {
-        _parameters.Lights.TurnOff();
+        Parameters.Lights.TurnOff();
     }
 }

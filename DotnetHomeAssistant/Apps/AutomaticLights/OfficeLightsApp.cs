@@ -4,9 +4,9 @@ using HomeAssistantGenerated;
 namespace DotnetHomeAssistant.Apps.AutomaticLights;
 
 [NetDaemonApp]
-public class OfficeMotionActivatedLightsApp : MotionActivatedLightsApp
+public class OfficeLightsApp : MotionActivatedLightsApp
 {
-    public OfficeMotionActivatedLightsApp(IHaContext ha) : base(ha, AutomaticLightsParametersFactory())
+    public OfficeLightsApp(IHaContext ha) : base(ha, AutomaticLightsParametersFactory())
     {
     }
 
