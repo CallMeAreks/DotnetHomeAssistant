@@ -1,4 +1,5 @@
 using System.Reflection;
+using DotnetHomeAssistant;
 using Microsoft.Extensions.Hosting;
 using NetDaemon.Extensions.Logging;
 using NetDaemon.Extensions.Scheduler;
@@ -19,6 +20,7 @@ try
                 .AddAppsFromAssembly(Assembly.GetExecutingAssembly())
                 .AddNetDaemonStateManager()
                 .AddNetDaemonScheduler()
+                .AddHomeAssistantEntities()
         )
         .Build()
         .RunAsync()

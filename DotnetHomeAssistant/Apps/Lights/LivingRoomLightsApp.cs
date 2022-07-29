@@ -5,22 +5,20 @@ using NetDaemon.HassModel.Entities;
 namespace DotnetHomeAssistant.Apps.Lights;
 
 [NetDaemonApp]
-public class LivingRoomLightsApp : MotionActivatedLightsApp
+public class LivingRoomLightsApp
 {
-    public LivingRoomLightsApp(IHaContext ha) : base(ha, AutomaticLightsFactory())
+    public LivingRoomLightsApp(Entities entities)
     {
-        Entities.BinarySensor.LumiLumiSensorMagnetAq2OnOff
+        var automaticLights = AutomaticLights.ConfigureWith(entities)
+            .HandleLights(entities.Light.LivingRoomLights1, entities.Light.LivingRoomLights2, entities.Light.LivingRoomLights3)
+            .AndDawnLights(entities.Light.LivingRoomFanLights)
+            .TriggeredBy(entities.BinarySensor.LivingRoomPresenceSensor)
+            .WithDefaultDuration()
+            .Initialize();
+
+        entities.BinarySensor.LumiLumiSensorMagnetAq2OnOff
             .StateChanges()
             .Where(e => e.New.IsOn())
-            .Subscribe(TurnOnLights);
-    }
-
-    private static Func<Entities, AutomaticLights> AutomaticLightsFactory()
-    {
-        return entities => new AutomaticLights(
-            trigger: entities.BinarySensor.LivingRoomPresenceSensor,
-            dayLights: new [] { entities.Light.LivingRoomLights1, entities.Light.LivingRoomLights2, entities.Light.LivingRoomLights3 },
-            nightLights: new [] { entities.Light.LivingRoomFanLights },
-            behavior: AutomaticLightBehavior.FixedDuration);
+            .Subscribe(automaticLights.TurnOn);
     }
 }

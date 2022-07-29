@@ -4,18 +4,15 @@ using HomeAssistantGenerated;
 namespace DotnetHomeAssistant.Apps.Lights;
 
 [NetDaemonApp]
-public class UpstairsHallwayLightsApp : MotionActivatedLightsApp
+public class UpstairsHallwayLightsApp
 {
-    public UpstairsHallwayLightsApp(IHaContext ha) : base(ha, AutomaticLightsFactory())
+    public UpstairsHallwayLightsApp(Entities entities)
     {
-    }
-
-    private static Func<Entities, AutomaticLights> AutomaticLightsFactory()
-    {
-        return entities => new  AutomaticLights(
-            trigger: entities.BinarySensor.LumiLumiSensorMotionAq225c1ec07IasZone,
-            dayLights: new [] { entities.Light.UpstairsHallwayLights },
-            nightLights: new [] { entities.Light.YeelightColor0x0000000007eca741 },
-            behavior: AutomaticLightBehavior.FixedDuration );
+        AutomaticLights.ConfigureWith(entities)
+            .HandleLights(entities.Light.UpstairsHallwayLights)
+            .AndDawnLights(entities.Light.YeelightColor0x0000000007eca741)
+            .TriggeredBy(entities.BinarySensor.LumiLumiSensorMotionAq225c1ec07IasZone)
+            .WithDefaultDuration()
+            .Initialize();
     }
 }

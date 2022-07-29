@@ -1,19 +1,18 @@
-﻿using HomeAssistantGenerated;
+﻿using DotnetHomeAssistant.Apps.Lights.Models;
+using HomeAssistantGenerated;
 
 namespace DotnetHomeAssistant.Apps.Lights;
 
 [NetDaemonApp]
-public class KitchenLightsApp : MotionActivatedLightsApp
+public class KitchenLightsApp
 {
-    public KitchenLightsApp(IHaContext ha) : base(ha, AutomaticLightsFactory())
+    public KitchenLightsApp(Entities entities)
     {
-    }
-
-    private static Func<Entities,Models.AutomaticLights> AutomaticLightsFactory()
-    {
-        return entities => new Models.AutomaticLights(
-            trigger: entities.BinarySensor.KitchenPresenceSensor,
-            dayLights: new [] { entities.Light.KitchenLights1, entities.Light.KitchenLights2 },
-            nightLights: new [] { entities.Light.KitchenFanLights });
+        AutomaticLights.ConfigureWith(entities)
+            .HandleLights(entities.Light.KitchenLights1, entities.Light.KitchenLights2)
+            .AndDawnLights(entities.Light.KitchenLights1, entities.Light.KitchenLights2)
+            .TriggeredBy(entities.BinarySensor.KitchenPresenceSensor)
+            .WhileOn()
+            .Initialize();
     }
 }

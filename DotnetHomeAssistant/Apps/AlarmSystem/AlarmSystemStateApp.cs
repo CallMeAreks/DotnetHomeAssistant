@@ -9,9 +9,9 @@ public sealed class AlarmSystemStateApp
 {
     private readonly Entities _entities;
 
-    public AlarmSystemStateApp(IHaContext ha)
+    public AlarmSystemStateApp(Entities entities)
     {
-        _entities = new Entities(ha);
+        _entities = entities;
 
         _entities.BinarySensor.Home
             .StateChanges()
