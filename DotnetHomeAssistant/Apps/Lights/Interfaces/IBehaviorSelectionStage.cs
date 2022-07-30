@@ -2,7 +2,7 @@
 
 public interface IBehaviorSelectionStage
 {
-    public IInitializeStage WhileOn();
-    public IInitializeStage WithDefaultDuration();
-    public IInitializeStage WithDuration(TimeSpan duration);
+    public IConditionSelectionStage WhileOn();
+    public IConditionSelectionStage WithDefaultDuration();
+    public IConditionSelectionStage WithDuration(TimeSpan duration);
 }

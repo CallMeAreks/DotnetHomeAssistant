@@ -7,7 +7,7 @@ using NetDaemon.HassModel.Entities;
 
 namespace DotnetHomeAssistant.Apps.Lights.Models;
 
-public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSelectionStage, ITriggerSelectionStage, IBehaviorSelectionStage, IInitializeStage
+public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSelectionStage, ITriggerSelectionStage, IBehaviorSelectionStage, IConditionSelectionStage, IInitializeStage
 {
     private static readonly TimeSpan DefaultDuration = TimeSpan.FromMinutes(5);
     private readonly Entities _entities;
@@ -18,6 +18,7 @@ public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSele
     private Entity _trigger = null!;
     private AutomaticLightBehavior _behavior;
     private TimeSpan _duration;
+    private NumericSensorEntity? _lightSensor;
 
     private AutomaticLights(Entities entities)
     {
@@ -46,7 +47,7 @@ public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSele
 
     public void TurnOn()
     {
-        if (!_entities.Sun.BelowNightlyElevationThreshold())
+        if (!IsRoomDark())
         {
             return;
         }
@@ -59,6 +60,11 @@ public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSele
         {
             _lights.TurnOn();
         }
+    }
+
+    private bool IsRoomDark()
+    {
+        return _lightSensor?.IsDark() ?? _entities.Sun.BelowNightlyElevationThreshold();
     }
 
     public void TurnOff() => _lights.Concat(_dawnLights).TurnOff();
@@ -83,23 +89,29 @@ public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSele
         return this;
     }
 
-    public IInitializeStage WhileOn()
+    public IConditionSelectionStage WhileOn()
     {
         _behavior = AutomaticLightBehavior.WhileTriggerIsOn;
         return this;
     }
 
-    public IInitializeStage WithDefaultDuration()
+    public IConditionSelectionStage WithDefaultDuration()
     {
         _behavior = AutomaticLightBehavior.FixedDuration;
         _duration = DefaultDuration;
         return this;
     }
 
-    public IInitializeStage WithDuration(TimeSpan duration)
+    public IConditionSelectionStage WithDuration(TimeSpan duration)
     {
         _behavior = AutomaticLightBehavior.FixedDuration;
         _duration = duration;
+        return this;
+    }
+
+    public IInitializeStage AndRoomIsDark(NumericSensorEntity lightSensor)
+    {
+        _lightSensor = lightSensor;
         return this;
     }
 }

@@ -22,4 +22,12 @@ public static class EntityExtensions
     {
         return sunEntities.Sun.Attributes!.Elevation < Sun.ElevationThresholdAtNight;
     }
+
+    /// <summary>Checks if the value of the sensor entity i elevation is below the threshold defined in constants.</summary>
+    /// <param name="sensorEntity"></param>
+    /// <returns>true if the elevation attribute is below "LightLevelThreshold", otherwise false</returns>
+    public static bool IsDark(this NumericSensorEntity sensorEntity)
+    {
+        return sensorEntity.State <= Light.LightLevelThreshold;
+    }
 }

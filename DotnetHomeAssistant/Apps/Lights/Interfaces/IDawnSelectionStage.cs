@@ -8,8 +8,3 @@ public interface IDawnSelectionStage
     public ITriggerSelectionStage AndDawnLights(LightEntity lightEntity, params LightEntity[] lightEntities);
     public IBehaviorSelectionStage TriggeredBy(Entity trigger);
 }
-
-public interface ITriggerSelectionStage
-{
-    public IBehaviorSelectionStage TriggeredBy(Entity trigger);
-}

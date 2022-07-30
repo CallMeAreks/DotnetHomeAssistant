@@ -10,9 +10,10 @@ public class KitchenLightsApp
     {
         AutomaticLights.ConfigureWith(entities)
             .HandleLights(entities.Light.KitchenLights1, entities.Light.KitchenLights2)
-            .AndDawnLights(entities.Light.KitchenLights1, entities.Light.KitchenLights2)
+            .AndDawnLights(entities.Light.KitchenFanLights)
             .TriggeredBy(entities.BinarySensor.KitchenPresenceSensor)
             .WhileOn()
+            .AndRoomIsDark(entities.Sensor.LumiLumiSensorMotionAq2Illuminance)
             .Initialize();
     }
 }

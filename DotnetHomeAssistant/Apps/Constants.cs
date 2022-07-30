@@ -21,4 +21,9 @@ public static class Constants
     {
         public const int ElevationThresholdAtNight = 8;
     }
+
+    public static class Light
+    {
+        public const int LightLevelThreshold = 15;
+    }
 }

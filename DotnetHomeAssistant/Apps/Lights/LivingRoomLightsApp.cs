@@ -14,6 +14,7 @@ public class LivingRoomLightsApp
             .AndDawnLights(entities.Light.LivingRoomFanLights)
             .TriggeredBy(entities.BinarySensor.LivingRoomPresenceSensor)
             .WithDefaultDuration()
+            .AndRoomIsDark(entities.Sensor.LumiLumiSensorMotionAq2Dc4ded07Illuminance)
             .Initialize();
 
         entities.BinarySensor.LumiLumiSensorMagnetAq2OnOff
