@@ -54,7 +54,7 @@ public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSele
 
         if (DateTime.Now.Hour is > 1 and < 7 && _dawnLights.Any())
         {
-            _dawnLights.TurnOn(brightnessPct: 30);
+            _dawnLights.TurnOn(brightnessPct: 20);
         }
         else
         {
