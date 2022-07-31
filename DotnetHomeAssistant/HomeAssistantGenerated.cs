@@ -199,6 +199,8 @@ namespace HomeAssistantGenerated
 		public BinarySensorEntity LivingRoomIsDark => new(_haContext, "binary_sensor.living_room_is_dark");
 		///<summary>Living Room Motion</summary>
 		public BinarySensorEntity LivingRoomMotion => new(_haContext, "binary_sensor.living_room_motion");
+		///<summary>Living Room Person Motion</summary>
+		public BinarySensorEntity LivingRoomPersonMotion => new(_haContext, "binary_sensor.living_room_person_motion");
 		///<summary>Living Room Presence Sensor</summary>
 		public BinarySensorEntity LivingRoomPresenceSensor => new(_haContext, "binary_sensor.living_room_presence_sensor");
 		///<summary>LUMI lumi.sensor_magnet.aq2 25aae207 on_off</summary>
@@ -249,7 +251,7 @@ namespace HomeAssistantGenerated
 		public BinarySensorEntity RemoteUi => new(_haContext, "binary_sensor.remote_ui");
 		///<summary>Rho Aias Active</summary>
 		public BinarySensorEntity RhoAiasActive => new(_haContext, "binary_sensor.rho_aias_active");
-		///<summary>shelly1-98CDAC245A11 Input</summary>
+		///<summary>Garage Door Input</summary>
 		public BinarySensorEntity Shelly198cdac245a11Input => new(_haContext, "binary_sensor.shelly1_98cdac245a11_input");
 		///<summary>Updater</summary>
 		public BinarySensorEntity Updater => new(_haContext, "binary_sensor.updater");
@@ -273,6 +275,10 @@ namespace HomeAssistantGenerated
 		public ButtonEntity BedroomOutlet2Identify => new(_haContext, "button.bedroom_outlet_2_identify");
 		///<summary>Bedroom Outlet identify</summary>
 		public ButtonEntity BedroomOutletIdentify => new(_haContext, "button.bedroom_outlet_identify");
+		///<summary>Garage Door OTA Update</summary>
+		public ButtonEntity GarageDoorOtaUpdate => new(_haContext, "button.garage_door_ota_update");
+		///<summary>Garage Door Reboot</summary>
+		public ButtonEntity GarageDoorReboot => new(_haContext, "button.garage_door_reboot");
 		///<summary>Kitchen Fan Light 1 identify</summary>
 		public ButtonEntity KitchenFanLight1Identify => new(_haContext, "button.kitchen_fan_light_1_identify");
 		///<summary>Kitchen Fan Light 2 identify</summary>
@@ -369,8 +375,12 @@ namespace HomeAssistantGenerated
 		public CameraEntity G3FlexHigh2 => new(_haContext, "camera.g3_flex_high_2");
 		///<summary>Patio High</summary>
 		public CameraEntity G3FlexHigh3 => new(_haContext, "camera.g3_flex_high_3");
+		///<summary>Living Room</summary>
+		public CameraEntity LivingRoom => new(_haContext, "camera.living_room");
 		///<summary>Living Room High</summary>
 		public CameraEntity LivingRoomHigh => new(_haContext, "camera.living_room_high");
+		///<summary>Living Room Person</summary>
+		public CameraEntity LivingRoomPerson => new(_haContext, "camera.living_room_person");
 		///<summary>Office High</summary>
 		public CameraEntity OfficeHigh => new(_haContext, "camera.office_high");
 	}
@@ -493,14 +503,14 @@ namespace HomeAssistantGenerated
 		public InputBooleanEntity MotionLivingRoomEnabled => new(_haContext, "input_boolean.motion_living_room_enabled");
 		///<summary>netdaemon_dotnet_home_assistant_apps_alarm_system_alarm_system_state_app</summary>
 		public InputBooleanEntity NetdaemonDotnetHomeAssistantAppsAlarmSystemAlarmSystemStateApp => new(_haContext, "input_boolean.netdaemon_dotnet_home_assistant_apps_alarm_system_alarm_system_state_app");
-		///<summary>netdaemon_dotnet_home_assistant_apps_automatic_lights_kitchen_motion_activated_lights_app</summary>
-		public InputBooleanEntity NetdaemonDotnetHomeAssistantAppsAutomaticLightsKitchenMotionActivatedLightsApp => new(_haContext, "input_boolean.netdaemon_dotnet_home_assistant_apps_automatic_lights_kitchen_motion_activated_lights_app");
-		///<summary>netdaemon_dotnet_home_assistant_apps_automatic_lights_living_room_motion_activated_lights_app</summary>
-		public InputBooleanEntity NetdaemonDotnetHomeAssistantAppsAutomaticLightsLivingRoomMotionActivatedLightsApp => new(_haContext, "input_boolean.netdaemon_dotnet_home_assistant_apps_automatic_lights_living_room_motion_activated_lights_app");
-		///<summary>netdaemon_dotnet_home_assistant_apps_automatic_lights_office_motion_activated_lights_app</summary>
-		public InputBooleanEntity NetdaemonDotnetHomeAssistantAppsAutomaticLightsOfficeMotionActivatedLightsApp => new(_haContext, "input_boolean.netdaemon_dotnet_home_assistant_apps_automatic_lights_office_motion_activated_lights_app");
-		///<summary>netdaemon_dotnet_home_assistant_apps_automatic_lights_upstairs_hallway_motion_activated_lights_app</summary>
-		public InputBooleanEntity NetdaemonDotnetHomeAssistantAppsAutomaticLightsUpstairsHallwayMotionActivatedLightsApp => new(_haContext, "input_boolean.netdaemon_dotnet_home_assistant_apps_automatic_lights_upstairs_hallway_motion_activated_lights_app");
+		///<summary>netdaemon_dotnet_home_assistant_apps_lights_kitchen_lights_app</summary>
+		public InputBooleanEntity NetdaemonDotnetHomeAssistantAppsLightsKitchenLightsApp => new(_haContext, "input_boolean.netdaemon_dotnet_home_assistant_apps_lights_kitchen_lights_app");
+		///<summary>netdaemon_dotnet_home_assistant_apps_lights_living_room_lights_app</summary>
+		public InputBooleanEntity NetdaemonDotnetHomeAssistantAppsLightsLivingRoomLightsApp => new(_haContext, "input_boolean.netdaemon_dotnet_home_assistant_apps_lights_living_room_lights_app");
+		///<summary>netdaemon_dotnet_home_assistant_apps_lights_office_lights_app</summary>
+		public InputBooleanEntity NetdaemonDotnetHomeAssistantAppsLightsOfficeLightsApp => new(_haContext, "input_boolean.netdaemon_dotnet_home_assistant_apps_lights_office_lights_app");
+		///<summary>netdaemon_dotnet_home_assistant_apps_lights_upstairs_hallway_lights_app</summary>
+		public InputBooleanEntity NetdaemonDotnetHomeAssistantAppsLightsUpstairsHallwayLightsApp => new(_haContext, "input_boolean.netdaemon_dotnet_home_assistant_apps_lights_upstairs_hallway_lights_app");
 	}
 
 	public partial class InputDatetimeEntities
@@ -938,6 +948,8 @@ namespace HomeAssistantGenerated
 		///<summary>front_door_door</summary>
 		public SensorEntity FrontDoorDoor => new(_haContext, "sensor.front_door_door");
 		public SensorEntity FrontDoorMotion => new(_haContext, "sensor.front_door_motion");
+		///<summary>front_door_motion</summary>
+		public SensorEntity FrontDoorMotion2 => new(_haContext, "sensor.front_door_motion_2");
 		///<summary>Last boot</summary>
 		public SensorEntity LastBoot => new(_haContext, "sensor.last_boot");
 		///<summary>NostalgiaDrive Battery State</summary>
@@ -1034,8 +1046,18 @@ namespace HomeAssistantGenerated
 		public NumericSensorEntity GustavitoBatteryLevel => new(_haContext, "sensor.gustavito_battery_level");
 		///<summary>hacs</summary>
 		public NumericSensorEntity Hacs => new(_haContext, "sensor.hacs");
+		///<summary>Living Room Camera Fps</summary>
+		public NumericSensorEntity LivingRoomCameraFps => new(_haContext, "sensor.living_room_camera_fps");
+		///<summary>Living Room Detection Fps</summary>
+		public NumericSensorEntity LivingRoomDetectionFps => new(_haContext, "sensor.living_room_detection_fps");
 		///<summary>Living Room Disk Write Rate</summary>
 		public NumericSensorEntity LivingRoomDiskWriteRate => new(_haContext, "sensor.living_room_disk_write_rate");
+		///<summary>Living Room Person</summary>
+		public NumericSensorEntity LivingRoomPerson => new(_haContext, "sensor.living_room_person");
+		///<summary>Living Room Process Fps</summary>
+		public NumericSensorEntity LivingRoomProcessFps => new(_haContext, "sensor.living_room_process_fps");
+		///<summary>Living Room Skipped Fps</summary>
+		public NumericSensorEntity LivingRoomSkippedFps => new(_haContext, "sensor.living_room_skipped_fps");
 		///<summary>Living Room Storage Used</summary>
 		public NumericSensorEntity LivingRoomStorageUsed => new(_haContext, "sensor.living_room_storage_used");
 		///<summary>LUMI lumi.sensor_magnet.aq2 25aae207 device_temperature</summary>
@@ -1270,6 +1292,8 @@ namespace HomeAssistantGenerated
 		public SwitchEntity HallwayLights => new(_haContext, "switch.hallway_lights");
 		///<summary>Indoor Camera Motion Detections</summary>
 		public SwitchEntity IndoorCameraMotionDetections => new(_haContext, "switch.indoor_camera_motion_detections");
+		///<summary>Living Room Detect</summary>
+		public SwitchEntity LivingRoomDetect => new(_haContext, "switch.living_room_detect");
 		///<summary>Living Room Detections: Motion</summary>
 		public SwitchEntity LivingRoomDetectionsMotion => new(_haContext, "switch.living_room_detections_motion");
 		///<summary>Living Room Fan 1 Buzzer</summary>
@@ -1292,6 +1316,10 @@ namespace HomeAssistantGenerated
 		public SwitchEntity LivingRoomOverlayShowName => new(_haContext, "switch.living_room_overlay_show_name");
 		///<summary>Living Room Privacy Mode</summary>
 		public SwitchEntity LivingRoomPrivacyMode => new(_haContext, "switch.living_room_privacy_mode");
+		///<summary>Living Room Recordings</summary>
+		public SwitchEntity LivingRoomRecordings => new(_haContext, "switch.living_room_recordings");
+		///<summary>Living Room Snapshots</summary>
+		public SwitchEntity LivingRoomSnapshots => new(_haContext, "switch.living_room_snapshots");
 		///<summary>Living Room Status Light On</summary>
 		public SwitchEntity LivingRoomStatusLightOn => new(_haContext, "switch.living_room_status_light_on");
 		///<summary>Office Detections: Motion</summary>
@@ -1326,7 +1354,7 @@ namespace HomeAssistantGenerated
 		public SwitchEntity PatioStatusLightOn => new(_haContext, "switch.patio_status_light_on");
 		///<summary>Rho Aias WOL</summary>
 		public SwitchEntity RhoAiasWol => new(_haContext, "switch.rho_aias_wol");
-		///<summary>shelly1-98CDAC245A11</summary>
+		///<summary>Garage Door</summary>
 		public SwitchEntity Shelly198cdac245a11 => new(_haContext, "switch.shelly1_98cdac245a11");
 		///<summary>SONOFF S31 Lite zb cef42125 on_off</summary>
 		public SwitchEntity SonoffS31LiteZbCef42125OnOff => new(_haContext, "switch.sonoff_s31_lite_zb_cef42125_on_off");
@@ -1398,7 +1426,7 @@ namespace HomeAssistantGenerated
 		public UpdateEntity TerminalSshUpdate => new(_haContext, "update.terminal_ssh_update");
 		///<summary>UDMPRO</summary>
 		public UpdateEntity Udmpro => new(_haContext, "update.udmpro");
-		///<summary>Upstairs AP</summary>
+		///<summary>Garage AP</summary>
 		public UpdateEntity UpstairsAp => new(_haContext, "update.upstairs_ap");
 		///<summary>US8P60</summary>
 		public UpdateEntity Us8p60 => new(_haContext, "update.us8p60");
@@ -1564,6 +1592,12 @@ namespace HomeAssistantGenerated
 
 		[JsonPropertyName("friendly_name")]
 		public string? FriendlyName { get; init; }
+
+		[JsonPropertyName("restored")]
+		public bool? Restored { get; init; }
+
+		[JsonPropertyName("supported_features")]
+		public double? SupportedFeatures { get; init; }
 	}
 
 	public partial record CalendarEntity : Entity<CalendarEntity, EntityState<CalendarAttributes>, CalendarAttributes>
@@ -1746,11 +1780,20 @@ namespace HomeAssistantGenerated
 		[JsonPropertyName("altitude")]
 		public double? Altitude { get; init; }
 
+		[JsonPropertyName("ap_mac")]
+		public string? ApMac { get; init; }
+
+		[JsonPropertyName("authorized")]
+		public bool? Authorized { get; init; }
+
 		[JsonPropertyName("battery_level")]
 		public double? BatteryLevel { get; init; }
 
 		[JsonPropertyName("course")]
 		public double? Course { get; init; }
+
+		[JsonPropertyName("essid")]
+		public string? Essid { get; init; }
 
 		[JsonPropertyName("friendly_name")]
 		public string? FriendlyName { get; init; }
@@ -1758,14 +1801,53 @@ namespace HomeAssistantGenerated
 		[JsonPropertyName("gps_accuracy")]
 		public double? GpsAccuracy { get; init; }
 
+		[JsonPropertyName("hostname")]
+		public string? Hostname { get; init; }
+
+		[JsonPropertyName("host_name")]
+		public string? HostName { get; init; }
+
 		[JsonPropertyName("icon")]
 		public string? Icon { get; init; }
+
+		[JsonPropertyName("ip")]
+		public string? Ip { get; init; }
+
+		[JsonPropertyName("is_11r")]
+		public bool? Is11r { get; init; }
+
+		[JsonPropertyName("is_guest")]
+		public bool? IsGuest { get; init; }
+
+		[JsonPropertyName("_is_guest_by_uap")]
+		public bool? IsGuestByUap { get; init; }
+
+		[JsonPropertyName("is_wired")]
+		public bool? IsWired { get; init; }
 
 		[JsonPropertyName("latitude")]
 		public double? Latitude { get; init; }
 
 		[JsonPropertyName("longitude")]
 		public double? Longitude { get; init; }
+
+		[JsonPropertyName("mac")]
+		public string? Mac { get; init; }
+
+		[JsonPropertyName("name")]
+		public string? Name { get; init; }
+
+		[JsonPropertyName("oui")]
+		public string? Oui { get; init; }
+
+		[JsonPropertyName("qos_policy_applied")]
+		public bool? QosPolicyApplied { get; init; }
+
+		[JsonPropertyName("radio")]
+		public string? Radio { get; init; }
+
+		[JsonPropertyName("radio_proto")]
+		public string? RadioProto { get; init; }
 
 		[JsonPropertyName("restored")]
 		public bool? Restored { get; init; }
@@ -1781,6 +1863,9 @@ namespace HomeAssistantGenerated
 
 		[JsonPropertyName("vertical_accuracy")]
 		public double? VerticalAccuracy { get; init; }
+
+		[JsonPropertyName("vlan")]
+		public double? Vlan { get; init; }
 	}
 
 	public partial record FanEntity : Entity<FanEntity, EntityState<FanAttributes>, FanAttributes>
@@ -1962,17 +2047,11 @@ namespace HomeAssistantGenerated
 
 	public record LightAttributes
 	{
-		[JsonPropertyName("brightness")]
-		public double? Brightness { get; init; }
-
 		[JsonPropertyName("color_mode")]
 		public string? ColorMode { get; init; }
 
 		[JsonPropertyName("deviceID")]
 		public string? DeviceID { get; init; }
-
-		[JsonPropertyName("effect")]
-		public string? Effect { get; init; }
 
 		[JsonPropertyName("effect_list")]
 		public IReadOnlyList<string>? EffectList { get; init; }
@@ -1985,9 +2064,6 @@ namespace HomeAssistantGenerated
 
 		[JsonPropertyName("friendly_name")]
 		public string? FriendlyName { get; init; }
-
-		[JsonPropertyName("hs_color")]
-		public IReadOnlyList<double>? HsColor { get; init; }
 
 		[JsonPropertyName("icon")]
 		public string? Icon { get; init; }
@@ -2013,9 +2089,6 @@ namespace HomeAssistantGenerated
 		[JsonPropertyName("restored")]
 		public bool? Restored { get; init; }
 
-		[JsonPropertyName("rgb_color")]
-		public IReadOnlyList<double>? RgbColor { get; init; }
-
 		[JsonPropertyName("supported_color_modes")]
 		public IReadOnlyList<string>? SupportedColorModes { get; init; }
 
@@ -2024,9 +2097,6 @@ namespace HomeAssistantGenerated
 
 		[JsonPropertyName("type")]
 		public string? Type { get; init; }
-
-		[JsonPropertyName("xy_color")]
-		public IReadOnlyList<double>? XyColor { get; init; }
 	}
 
 	public partial record LockEntity : Entity<LockEntity, EntityState<LockAttributes>, LockAttributes>
@@ -2304,7 +2374,7 @@ namespace HomeAssistantGenerated
 		public string? DeviceID { get; init; }
 
 		[JsonPropertyName("dismissed")]
-		public string? Dismissed { get; init; }
+		public object? Dismissed { get; init; }
 
 		[JsonPropertyName("friendly_name")]
 		public string? FriendlyName { get; init; }
@@ -2431,9 +2501,6 @@ namespace HomeAssistantGenerated
 
 		[JsonPropertyName("type")]
 		public string? Type { get; init; }
-
-		[JsonPropertyName("unknown")]
-		public double? Unknown { get; init; }
 
 		[JsonPropertyName("userAgent")]
 		public string? UserAgent { get; init; }
@@ -2638,9 +2705,6 @@ namespace HomeAssistantGenerated
 		[JsonPropertyName("release_url")]
 		public string? ReleaseUrl { get; init; }
 
-		[JsonPropertyName("restored")]
-		public bool? Restored { get; init; }
-
 		[JsonPropertyName("skipped_version")]
 		public object? SkippedVersion { get; init; }
 
@@ -2815,6 +2879,8 @@ namespace HomeAssistantGenerated
 
 		UiLovelaceMinimalistServices UiLovelaceMinimalist { get; }
 
+		UnifiServices Unifi { get; }
+
 		UnifiprotectServices Unifiprotect { get; }
 
 		UpdateServices Update { get; }
@@ -2890,6 +2956,7 @@ namespace HomeAssistantGenerated
 		public TimerServices Timer => new(_haContext);
 		public TtsServices Tts => new(_haContext);
 		public UiLovelaceMinimalistServices UiLovelaceMinimalist => new(_haContext);
+		public UnifiServices Unifi => new(_haContext);
 		public UnifiprotectServices Unifiprotect => new(_haContext);
 		public UpdateServices Update => new(_haContext);
 		public VacuumServices Vacuum => new(_haContext);
@@ -8385,6 +8452,41 @@ namespace HomeAssistantGenerated
 		{
 			_haContext.CallService("ui_lovelace_minimalist", "reload", null);
 		}
+	}
+
+	public class UnifiServices
+	{
+		private readonly IHaContext _haContext;
+		public UnifiServices(IHaContext haContext)
+		{
+			_haContext = haContext;
+		}
+
+		///<summary>Try to get wireless client to reconnect to UniFi Network</summary>
+		public void ReconnectClient(UnifiReconnectClientParameters data)
+		{
+			_haContext.CallService("unifi", "reconnect_client", null, data);
+		}
+
+		///<summary>Try to get wireless client to reconnect to UniFi Network</summary>
+		///<param name="deviceId">Try reconnect client to wireless network</param>
+		public void ReconnectClient(string @deviceId)
+		{
+			_haContext.CallService("unifi", "reconnect_client", null, new UnifiReconnectClientParameters{DeviceId = @deviceId});
+		}
+
+		///<summary>Clean up clients that has only been associated with the controller for a short period of time.</summary>
+		public void RemoveClients()
+		{
+			_haContext.CallService("unifi", "remove_clients", null);
+		}
+	}
+
+	public record UnifiReconnectClientParameters
+	{
+		///<summary>Try reconnect client to wireless network</summary>
+		[JsonPropertyName("device_id")]
+		public string? DeviceId { get; init; }
 	}
 
 	public class UnifiprotectServices
