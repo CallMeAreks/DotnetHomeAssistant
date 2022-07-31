@@ -199,8 +199,6 @@ namespace HomeAssistantGenerated
 		public BinarySensorEntity LivingRoomIsDark => new(_haContext, "binary_sensor.living_room_is_dark");
 		///<summary>Living Room Motion</summary>
 		public BinarySensorEntity LivingRoomMotion => new(_haContext, "binary_sensor.living_room_motion");
-		///<summary>Living Room Person Motion</summary>
-		public BinarySensorEntity LivingRoomPersonMotion => new(_haContext, "binary_sensor.living_room_person_motion");
 		///<summary>Living Room Presence Sensor</summary>
 		public BinarySensorEntity LivingRoomPresenceSensor => new(_haContext, "binary_sensor.living_room_presence_sensor");
 		///<summary>LUMI lumi.sensor_magnet.aq2 25aae207 on_off</summary>
@@ -375,12 +373,8 @@ namespace HomeAssistantGenerated
 		public CameraEntity G3FlexHigh2 => new(_haContext, "camera.g3_flex_high_2");
 		///<summary>Patio High</summary>
 		public CameraEntity G3FlexHigh3 => new(_haContext, "camera.g3_flex_high_3");
-		///<summary>Living Room</summary>
-		public CameraEntity LivingRoom => new(_haContext, "camera.living_room");
 		///<summary>Living Room High</summary>
 		public CameraEntity LivingRoomHigh => new(_haContext, "camera.living_room_high");
-		///<summary>Living Room Person</summary>
-		public CameraEntity LivingRoomPerson => new(_haContext, "camera.living_room_person");
 		///<summary>Office High</summary>
 		public CameraEntity OfficeHigh => new(_haContext, "camera.office_high");
 	}
@@ -487,6 +481,8 @@ namespace HomeAssistantGenerated
 		public FanEntity LivingRoomFan1 => new(_haContext, "fan.living_room_fan_1");
 		///<summary>Living Room Fan 2</summary>
 		public FanEntity LivingRoomFan2 => new(_haContext, "fan.living_room_fan_2");
+		///<summary>Living Room Fans</summary>
+		public FanEntity LivingRoomFans => new(_haContext, "fan.living_room_fans");
 	}
 
 	public partial class InputBooleanEntities
@@ -945,7 +941,6 @@ namespace HomeAssistantGenerated
 		///<summary>Freyja WiFi Connection</summary>
 		public SensorEntity FreyjaWifiConnection => new(_haContext, "sensor.freyja_wifi_connection");
 		public SensorEntity FrontDoorCallstatus => new(_haContext, "sensor.front_door_callstatus");
-		///<summary>front_door_door</summary>
 		public SensorEntity FrontDoorDoor => new(_haContext, "sensor.front_door_door");
 		public SensorEntity FrontDoorMotion => new(_haContext, "sensor.front_door_motion");
 		///<summary>front_door_motion</summary>
@@ -982,6 +977,8 @@ namespace HomeAssistantGenerated
 		public NumericSensorEntity Cpu1InferenceSpeed => new(_haContext, "sensor.cpu1_inference_speed");
 		///<summary>Cpu2 Inference Speed</summary>
 		public NumericSensorEntity Cpu2InferenceSpeed => new(_haContext, "sensor.cpu2_inference_speed");
+		///<summary>Cpu3 Inference Speed</summary>
+		public NumericSensorEntity Cpu3InferenceSpeed => new(_haContext, "sensor.cpu3_inference_speed");
 		///<summary>Detection Fps</summary>
 		public NumericSensorEntity DetectionFps => new(_haContext, "sensor.detection_fps");
 		///<summary>Disk use (percent) /</summary>
@@ -1046,18 +1043,8 @@ namespace HomeAssistantGenerated
 		public NumericSensorEntity GustavitoBatteryLevel => new(_haContext, "sensor.gustavito_battery_level");
 		///<summary>hacs</summary>
 		public NumericSensorEntity Hacs => new(_haContext, "sensor.hacs");
-		///<summary>Living Room Camera Fps</summary>
-		public NumericSensorEntity LivingRoomCameraFps => new(_haContext, "sensor.living_room_camera_fps");
-		///<summary>Living Room Detection Fps</summary>
-		public NumericSensorEntity LivingRoomDetectionFps => new(_haContext, "sensor.living_room_detection_fps");
 		///<summary>Living Room Disk Write Rate</summary>
 		public NumericSensorEntity LivingRoomDiskWriteRate => new(_haContext, "sensor.living_room_disk_write_rate");
-		///<summary>Living Room Person</summary>
-		public NumericSensorEntity LivingRoomPerson => new(_haContext, "sensor.living_room_person");
-		///<summary>Living Room Process Fps</summary>
-		public NumericSensorEntity LivingRoomProcessFps => new(_haContext, "sensor.living_room_process_fps");
-		///<summary>Living Room Skipped Fps</summary>
-		public NumericSensorEntity LivingRoomSkippedFps => new(_haContext, "sensor.living_room_skipped_fps");
 		///<summary>Living Room Storage Used</summary>
 		public NumericSensorEntity LivingRoomStorageUsed => new(_haContext, "sensor.living_room_storage_used");
 		///<summary>LUMI lumi.sensor_magnet.aq2 25aae207 device_temperature</summary>
@@ -1292,8 +1279,6 @@ namespace HomeAssistantGenerated
 		public SwitchEntity HallwayLights => new(_haContext, "switch.hallway_lights");
 		///<summary>Indoor Camera Motion Detections</summary>
 		public SwitchEntity IndoorCameraMotionDetections => new(_haContext, "switch.indoor_camera_motion_detections");
-		///<summary>Living Room Detect</summary>
-		public SwitchEntity LivingRoomDetect => new(_haContext, "switch.living_room_detect");
 		///<summary>Living Room Detections: Motion</summary>
 		public SwitchEntity LivingRoomDetectionsMotion => new(_haContext, "switch.living_room_detections_motion");
 		///<summary>Living Room Fan 1 Buzzer</summary>
@@ -1316,10 +1301,6 @@ namespace HomeAssistantGenerated
 		public SwitchEntity LivingRoomOverlayShowName => new(_haContext, "switch.living_room_overlay_show_name");
 		///<summary>Living Room Privacy Mode</summary>
 		public SwitchEntity LivingRoomPrivacyMode => new(_haContext, "switch.living_room_privacy_mode");
-		///<summary>Living Room Recordings</summary>
-		public SwitchEntity LivingRoomRecordings => new(_haContext, "switch.living_room_recordings");
-		///<summary>Living Room Snapshots</summary>
-		public SwitchEntity LivingRoomSnapshots => new(_haContext, "switch.living_room_snapshots");
 		///<summary>Living Room Status Light On</summary>
 		public SwitchEntity LivingRoomStatusLightOn => new(_haContext, "switch.living_room_status_light_on");
 		///<summary>Office Detections: Motion</summary>
@@ -1881,6 +1862,9 @@ namespace HomeAssistantGenerated
 
 	public record FanAttributes
 	{
+		[JsonPropertyName("entity_id")]
+		public IReadOnlyList<string>? EntityId { get; init; }
+
 		[JsonPropertyName("friendly_name")]
 		public string? FriendlyName { get; init; }
 
@@ -2352,6 +2336,12 @@ namespace HomeAssistantGenerated
 		[JsonPropertyName("attribution")]
 		public string? Attribution { get; init; }
 
+		[JsonPropertyName("battery_level")]
+		public double? BatteryLevel { get; init; }
+
+		[JsonPropertyName("charging")]
+		public bool? Charging { get; init; }
+
 		[JsonPropertyName("config")]
 		public object? Config { get; init; }
 
@@ -2375,6 +2365,9 @@ namespace HomeAssistantGenerated
 
 		[JsonPropertyName("dismissed")]
 		public object? Dismissed { get; init; }
+
+		[JsonPropertyName("DoorID")]
+		public string? DoorID { get; init; }
 
 		[JsonPropertyName("friendly_name")]
 		public string? FriendlyName { get; init; }
@@ -2426,6 +2419,12 @@ namespace HomeAssistantGenerated
 
 		[JsonPropertyName("Ocean")]
 		public string? Ocean { get; init; }
+
+		[JsonPropertyName("on_bicycle")]
+		public double? OnBicycle { get; init; }
+
+		[JsonPropertyName("on_foot")]
+		public double? OnFoot { get; init; }
 
 		[JsonPropertyName("path")]
 		public string? Path { get; init; }
@@ -2502,6 +2501,12 @@ namespace HomeAssistantGenerated
 		[JsonPropertyName("type")]
 		public string? Type { get; init; }
 
+		[JsonPropertyName("unknown")]
+		public double? Unknown { get; init; }
+
+		[JsonPropertyName("Unlock")]
+		public string? Unlock { get; init; }
+
 		[JsonPropertyName("userAgent")]
 		public string? UserAgent { get; init; }
 
@@ -2510,6 +2515,9 @@ namespace HomeAssistantGenerated
 
 		[JsonPropertyName("visibility")]
 		public string? Visibility { get; init; }
+
+		[JsonPropertyName("walking")]
+		public double? Walking { get; init; }
 
 		[JsonPropertyName("width")]
 		public double? Width { get; init; }

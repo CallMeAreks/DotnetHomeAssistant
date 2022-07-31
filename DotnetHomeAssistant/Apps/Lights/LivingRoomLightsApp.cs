@@ -20,5 +20,10 @@ public class LivingRoomLightsApp
             .StateChanges()
             .Where(e => e.New.IsOn())
             .Subscribe(_ => automaticLights.TurnOn());
+
+        entities.BinarySensor.LivingRoomPresenceSensor
+            .StateChanges()
+            .WhenStateIsFor(e => e.IsOff(), TimeSpan.FromMinutes(5))
+            .Subscribe(_ => entities.Fan.LivingRoomFans.TurnOff());
     }
 }
