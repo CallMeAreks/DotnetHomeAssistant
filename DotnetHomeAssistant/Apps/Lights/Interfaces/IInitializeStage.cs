@@ -2,5 +2,5 @@
 
 public interface IInitializeStage
 {
-    IAutomaticLights Initialize();
+    IAutomaticLights Register();
 }

@@ -15,7 +15,7 @@ public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSele
     private readonly List<LightEntity> _lights = new();
     private readonly List<LightEntity> _dawnLights = new();
 
-    private Entity _trigger = null!;
+    private readonly List<BinarySensorEntity> _triggers = new();
     private AutomaticLightBehavior _behavior;
     private TimeSpan _duration;
     private NumericSensorEntity? _lightSensor;
@@ -30,14 +30,14 @@ public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSele
         return new AutomaticLights(entities);
     }
 
-    public IAutomaticLights Initialize()
+    public IAutomaticLights Register()
     {
-        _trigger
+        _triggers
             .StateChanges()
             .Where(e => e.New.IsOn())
             .Subscribe(_ => TurnOn());
 
-        _trigger
+        _triggers
             .StateChanges()
             .WhenTriggerIsOffFor(_behavior, _duration)
             .Subscribe(_ => TurnOff());
@@ -83,9 +83,10 @@ public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSele
         return this;
     }
 
-    public IBehaviorSelectionStage TriggeredBy(Entity trigger)
+    public IBehaviorSelectionStage TriggeredBy(BinarySensorEntity trigger, params BinarySensorEntity[] triggers)
     {
-        _trigger = trigger;
+        _triggers.Add(trigger);
+        _triggers.AddRange(triggers);
         return this;
     }
 

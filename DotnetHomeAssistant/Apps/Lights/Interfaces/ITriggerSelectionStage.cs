@@ -1,8 +1,8 @@
-﻿using NetDaemon.HassModel.Entities;
+﻿using HomeAssistantGenerated;
 
 namespace DotnetHomeAssistant.Apps.Lights.Interfaces;
 
 public interface ITriggerSelectionStage
 {
-    public IBehaviorSelectionStage TriggeredBy(Entity trigger);
+    public IBehaviorSelectionStage TriggeredBy(BinarySensorEntity trigger, params BinarySensorEntity[] triggers);
 }
