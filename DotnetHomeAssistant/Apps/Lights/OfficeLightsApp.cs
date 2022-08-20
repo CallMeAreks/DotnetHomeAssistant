@@ -12,6 +12,6 @@ public class OfficeLightsApp
             .HandleLights(entities.Light.UpstairsRoomLights)
             .TriggeredBy(entities.BinarySensor.OfficeMotion)
             .WithDefaultDuration()
-            .Initialize();
+            .Register();
     }
 }

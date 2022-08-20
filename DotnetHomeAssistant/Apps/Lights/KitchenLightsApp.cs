@@ -14,7 +14,7 @@ public class KitchenLightsApp
             .AndDawnLights(entities.Light.KitchenFanLights)
             .TriggeredBy(entities.BinarySensor.KitchenPresenceSensor)
             .WhileOn()
-            .Initialize();
+            .Register();
 
         entities.BinarySensor.KitchenPresenceSensor
             .StateChanges()

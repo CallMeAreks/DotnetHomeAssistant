@@ -13,6 +13,6 @@ public class UpstairsHallwayLightsApp
             .AndDawnLights(entities.Light.YeelightColor0x0000000007eca741)
             .TriggeredBy(entities.BinarySensor.LumiLumiSensorMotionAq225c1ec07IasZone)
             .WithDefaultDuration()
-            .Initialize();
+            .Register();
     }
 }
