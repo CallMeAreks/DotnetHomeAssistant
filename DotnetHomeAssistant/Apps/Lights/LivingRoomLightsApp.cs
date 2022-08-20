@@ -9,21 +9,16 @@ public class LivingRoomLightsApp
 {
     public LivingRoomLightsApp(Entities entities)
     {
-        var automaticLights = AutomaticLights.ConfigureWith(entities)
+        AutomaticLights.ConfigureWith(entities)
             .HandleLights(entities.Light.LivingRoomLights1, entities.Light.LivingRoomLights2, entities.Light.LivingRoomLights3)
             .AndDawnLights(entities.Light.LivingRoomFanLights)
-            .TriggeredBy(entities.BinarySensor.LivingRoomPresenceSensor)
-            .WithDefaultDuration()
-            .Initialize();
-
-        entities.BinarySensor.LumiLumiSensorMagnetAq2OnOff
-            .StateChanges()
-            .Where(e => e.New.IsOn())
-            .Subscribe(_ => automaticLights.TurnOn());
+            .TriggeredBy(entities.BinarySensor.LivingRoomPresenceSensor, entities.BinarySensor.LumiLumiSensorMagnetAq2OnOff, entities.BinarySensor.LumiLumiSensorMagnetAq2E370e007OnOff)
+            .WithDuration(TimeSpan.FromMinutes(30))
+            .Register();
 
         entities.BinarySensor.LivingRoomPresenceSensor
             .StateChanges()
-            .WhenStateIsFor(e => e.IsOff(), TimeSpan.FromMinutes(5))
+            .WhenStateIsFor(e => e.IsOff(), TimeSpan.FromMinutes(30))
             .Subscribe(_ => entities.Fan.LivingRoomFans.TurnOff());
     }
 }
