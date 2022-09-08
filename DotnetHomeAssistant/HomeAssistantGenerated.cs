@@ -639,6 +639,8 @@ namespace HomeAssistantGenerated
 		public LightEntity Leds => new(_haContext, "light.leds");
 		///<summary>LEDs</summary>
 		public LightEntity Leds2 => new(_haContext, "light.leds_2");
+		///<summary>Living Room Ceiling Lights</summary>
+		public LightEntity LivingRoomCeilingLights => new(_haContext, "light.living_room_ceiling_lights");
 		///<summary>Living Room Fan 1 Light</summary>
 		public LightEntity LivingRoomFan1Light => new(_haContext, "light.living_room_fan_1_light");
 		///<summary>Living Room Fan 2 Bulb 1 level, on_off</summary>
@@ -2114,9 +2116,6 @@ namespace HomeAssistantGenerated
 		[JsonPropertyName("color_mode")]
 		public string? ColorMode { get; init; }
 
-		[JsonPropertyName("color_temp")]
-		public double? ColorTemp { get; init; }
-
 		[JsonPropertyName("deviceID")]
 		public string? DeviceID { get; init; }
 
@@ -2527,9 +2526,6 @@ namespace HomeAssistantGenerated
 		[JsonPropertyName("Ocean")]
 		public string? Ocean { get; init; }
 
-		[JsonPropertyName("on_bicycle")]
-		public double? OnBicycle { get; init; }
-
 		[JsonPropertyName("on_foot")]
 		public double? OnFoot { get; init; }
 
@@ -2562,9 +2558,6 @@ namespace HomeAssistantGenerated
 
 		[JsonPropertyName("restored")]
 		public bool? Restored { get; init; }
-
-		[JsonPropertyName("running")]
-		public double? Running { get; init; }
 
 		[JsonPropertyName("sorted_active")]
 		public string? SortedActive { get; init; }
@@ -2665,7 +2658,7 @@ namespace HomeAssistantGenerated
 		public double? BatteryVoltage { get; init; }
 
 		[JsonPropertyName("connected_not_paired_devices")]
-		public IReadOnlyList<object>? ConnectedNotPairedDevices { get; init; }
+		public IReadOnlyList<string>? ConnectedNotPairedDevices { get; init; }
 
 		[JsonPropertyName("connected_paired_devices")]
 		public IReadOnlyList<object>? ConnectedPairedDevices { get; init; }

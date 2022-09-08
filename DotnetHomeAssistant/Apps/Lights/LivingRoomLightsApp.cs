@@ -10,10 +10,14 @@ public class LivingRoomLightsApp
     public LivingRoomLightsApp(Entities entities)
     {
         AutomaticLights.ConfigureWith(entities)
-            .HandleLights(entities.Light.LivingRoomLights1, entities.Light.LivingRoomLights2, entities.Light.LivingRoomLights3)
+            .HandleLights(entities.Light.LivingRoomCeilingLights)
             .AndDawnLights(entities.Light.LivingRoomFanLights)
-            .TriggeredBy(entities.BinarySensor.LivingRoomPresenceSensor, entities.BinarySensor.LumiLumiSensorMagnetAq2OnOff, entities.BinarySensor.LumiLumiSensorMagnetAq2E370e007OnOff)
-            .WithDuration(TimeSpan.FromMinutes(30))
+            .TriggeredBy(
+                entities.BinarySensor.LivingRoomPresenceSensor,
+                entities.BinarySensor.KitchenPresenceSensor,
+                entities.BinarySensor.LumiLumiSensorMagnetAq2OnOff,
+                entities.BinarySensor.LumiLumiSensorMagnetAq2E370e007OnOff)
+            .WithDuration(TimeSpan.FromMinutes(5))
             .Register();
 
         entities.BinarySensor.LivingRoomPresenceSensor
