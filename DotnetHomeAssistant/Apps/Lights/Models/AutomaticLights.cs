@@ -109,10 +109,4 @@ public class AutomaticLights : IAutomaticLights, ILightSelectionStage, IDawnSele
         _duration = duration;
         return this;
     }
-
-    public IInitializeStage AndRoomIsDark(NumericSensorEntity lightSensor)
-    {
-        _lightSensor = lightSensor;
-        return this;
-    }
 }

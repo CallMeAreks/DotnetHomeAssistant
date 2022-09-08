@@ -12,12 +12,8 @@ public class LivingRoomLightsApp
         AutomaticLights.ConfigureWith(entities)
             .HandleLights(entities.Light.LivingRoomCeilingLights)
             .AndDawnLights(entities.Light.LivingRoomFanLights)
-            .TriggeredBy(
-                entities.BinarySensor.LivingRoomPresenceSensor,
-                entities.BinarySensor.KitchenPresenceSensor,
-                entities.BinarySensor.LumiLumiSensorMagnetAq2OnOff,
-                entities.BinarySensor.LumiLumiSensorMagnetAq2E370e007OnOff)
-            .WithDuration(TimeSpan.FromMinutes(5))
+            .TriggeredBy(entities.BinarySensor.LivingRoomPresenceSensor)
+            .WhileOn()
             .Register();
 
         entities.BinarySensor.LivingRoomPresenceSensor
